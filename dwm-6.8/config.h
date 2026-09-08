@@ -8,14 +8,15 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "GeistMono NF:size=16" };
 static const char dmenufont[]       = "GeistMono NF:size=10";
 static const char col_gray1[]       = "#222222";
-static const char col_gray2[]       = "#444444";
+static const char col_green2[]      = "#00ff00";
+static const char col_green3[] 	    = "#00BC4D";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#005577";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeNorm] = { col_green3, col_gray1, col_cyan },
+	[SchemeSel]  = { col_green2, col_cyan,  col_green3  },
 };
 
 /* tagging */
@@ -28,7 +29,6 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
 };
 
 /* layout(s) */
@@ -58,13 +58,13 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_green2, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *browser[] = {"qutebrowser", NULL};
 static const char *ghidra[] = {"ghidra", NULL};
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                        XK_p,      spawn,         {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,         {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,             		XK_b,      spawn,    	   { .v = browser}},
 	{ MODKEY|ShiftMask,             XK_b,      togglebar,      {0} },
